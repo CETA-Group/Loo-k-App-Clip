@@ -2,14 +2,6 @@
 
 An App Clip simulator for Hack Canada. Build creative App Clip experiences without needing entitlements, Associated Domains, or an Apple Developer account.
 
-App Clips are lightweight, instant experiences invoked by a URL. No install, no login, no onboarding. Apple designed them for "30-second moments." Most people only think of them as "scan to pay." **Your challenge: what else should App Clips be used for that nobody has built yet?**
-
-## About Reactiv
-
-Reactiv is a platform for building and managing mobile commerce apps for e-commerce businesses. Its key differentiator is **Reactiv Clips**, powered by Apple's App Clip technology.
-
-### What is an App Clip?
-
 An App Clip is a lightweight slice of an app that lets users complete a specific task quickly without downloading the full app. They can be triggered by:
 
 - Scanning an App Clip code (similar to a QR code)
@@ -18,9 +10,19 @@ An App Clip is a lightweight slice of an app that lets users complete a specific
 - Tapping a Smart App Banner in Safari
 - Siri suggestions or Apple Maps
 
+No install, no login, no onboarding. Apple designed them for "30-second moments." Most people only think of them as "scan to pay." **Your challenge: what else should App Clips be used for that nobody has built yet?**
+
+## About Reactiv
+
+Reactiv is a platform for building and managing mobile commerce apps for e-commerce businesses. Its key differentiator is **Reactiv Clips**, powered by Apple's App Clip technology.
+
 ### Reactiv Clips
 
-When a user opens a Reactiv Clip for a brand, that brand can send the user push notifications for up to 8 hours. This creates a short but powerful window for targeted, time-sensitive engagement. No app install, no account creation. Just instant access and a direct communication channel.
+Reactiv Clips bring App Clip technology to any Shopify merchant. Install directly from the Shopify App Store, build Clip experiences with a drag-and-drop visual builder or generate them with AI, and go live without writing code. Clips support configurable push notifications, giving brands up to 8 hours of direct, time-sensitive engagement after a single interaction. No app install, no account creation. Just instant access and a direct communication channel.
+
+Reactiv integrates natively with Shopify for product catalog, cart, and checkout, and supports third-party providers for payments and analytics.
+
+Learn more: [Reactiv](https://reactiv.ai/)
 
 ## Problem Statements
 
@@ -91,8 +93,9 @@ Starter templates are provided so you can focus on your solution, not scaffoldin
 - How can it power real-time engagement during an event?
 - How can it enable merch sales and audience building in a single interaction?
 
-## Guardrails
+## Assumptions & Constraints
 
+- **iOS only.** Your solution needs to work on iPhone. Reactiv Clips are an Apple technology (App Clips). Over 80% of North American mobile commerce occurs on iPhones, so an iOS-only solution is commercially reasonable.
 - Avoid trivial builds (e.g., coupon/discount apps with no depth).
 - Think commercially and technically. Aim for solutions that could ship or directly inform product roadmap decisions.
 - Reasonable assumptions are allowed where integrations are unavailable (e.g., Shopify API access may be provided).
@@ -161,6 +164,16 @@ Everything else is yours. Use any iOS framework: URLSession, CoreLocation, MapKi
 
 No mock services are provided. You choose the domain, the data, and the experience.
 
+## What You Should Deliver
+
+Your submission should address the following:
+
+- **Problem framing** — Which touchpoint(s) in the customer journey are you targeting, and why? What friction or missed opportunity are you solving for?
+- **Proposed solution** — How does your solution use Reactiv Clips? How is the Clip invoked? What does the user experience look like end-to-end?
+- **Platform extensions (if applicable)** — If your solution requires new Reactiv Clips capabilities, describe what they are and how they would work.
+- **Prototype or mockup** — A visual demonstration of the key user flows (wireframes, clickable prototype, or equivalent).
+- **Impact hypothesis** — How does your solution increase One Live's merchandise revenue? Be specific about which channel (venue, online, or both) and why.
+
 ## Project Structure
 
 ```
@@ -202,3 +215,7 @@ ReactivChallengeKit/
 | Scalability of the idea    | 10%    |
 
 The question is NOT "can you build an iOS app?" The question is: **"what experience fits the shape of an App Clip that nobody has thought of?"**
+
+## Supporting Resources
+
+- [Apple App Clips Developer Documentation](https://developer.apple.com/documentation/appclip)
