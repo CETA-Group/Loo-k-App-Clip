@@ -1,3 +1,9 @@
+//  InvocationConsole.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import SwiftUI
 
 /// URL text field + invoke button. Replaces Associated Domains for simulation.
@@ -47,8 +53,9 @@ struct InvocationConsole: View {
                 }
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
-                .glassEffect(.regular, in: .capsule)
+                .glassEffect(.regular.interactive(), in: .capsule)
             }
+            .padding(.horizontal, 16)
 
             if !router.invocationHistory.isEmpty {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -70,11 +77,15 @@ struct InvocationConsole: View {
                                 }
                             }
                         }
+                        .padding(.vertical, 6)
                     }
                 }
+                .scrollClipDisabled()
+                .padding(.horizontal, 16)
+                .padding(.top, 2)
+                .padding(.bottom, 4)
             }
         }
-        .padding(.horizontal, 16)
         .animation(.easeOut(duration: 0.2), value: router.errorMessage)
     }
 

@@ -1,14 +1,23 @@
+//  ClipRouter.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import SwiftUI
 import UIKit
 
 @Observable
 final class ClipRouter {
 
-    static let allExperiences: [any ClipExperience.Type] = [
+    static let builtInExperiences: [any ClipExperience.Type] = [
         HelloClipExperience.self,
-        TrailCheckInExperience.self,
-        // Register your experiences below this line:
+        VenueMerchExperience.self,
     ]
+
+    static var allExperiences: [any ClipExperience.Type] {
+        builtInExperiences + SubmissionRegistry.all
+    }
 
     struct MatchResult: Identifiable {
         let id = UUID()
@@ -59,8 +68,11 @@ final class ClipRouter {
         let defaults: [String: String] = [
             "name": "Hacker",
             "id": "42",
-            "trailId": "grouse-grind",
-            "tableId": "7",
+            "venueId": "rogers-centre",
+            "showId": "tonight",
+            "artistId": "jelly-roll",
+            "boothId": "3",
+            "param": "demo",
         ]
         let segments = pattern.split(separator: "/", omittingEmptySubsequences: true)
         let resolved = segments.map { segment -> String in

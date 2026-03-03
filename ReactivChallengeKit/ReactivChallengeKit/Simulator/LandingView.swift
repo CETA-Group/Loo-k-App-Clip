@@ -1,111 +1,283 @@
+//  LandingView.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import SwiftUI
 
 struct LandingView: View {
     @Bindable var router: ClipRouter
+    @State private var selectedTouchpoint: JourneyTouchpoint = .showDay
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.05, green: 0.05, blue: 0.15),
-                    Color(red: 0.08, green: 0.08, blue: 0.22),
-                    Color(red: 0.12, green: 0.10, blue: 0.30)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            ClipBackground()
 
-            VStack(spacing: 0) {
-                Spacer()
+            ScrollView {
+                VStack(spacing: 14) {
+                    tonightBanner
+                        .padding(.top, 8)
 
-                VStack(spacing: 16) {
-                    Image(systemName: "appclip")
-                        .font(.system(size: 64, weight: .thin))
-                        .foregroundStyle(.white.opacity(0.9))
-                        .shadow(color: .blue.opacity(0.4), radius: 20)
+                    journeyTimeline
 
-                    Text("ReactivChallengeKit")
-                        .font(.system(size: 32, weight: .bold))
-                        .foregroundStyle(.white)
+                    contextStrip
+                        .padding(.horizontal, 16)
 
-                    Text("Build an App Clip experience.\nType a URL below to invoke it.")
-                        .font(.system(size: 15))
-                        .foregroundStyle(.white.opacity(0.6))
-                        .multilineTextAlignment(.center)
+                    clipsContent
                 }
+                .padding(.bottom, 20)
+            }
+            .scrollIndicators(.hidden)
+        }
+        .safeAreaInset(edge: .bottom, spacing: 8) {
+            InvocationConsole(router: router)
+                .padding(.bottom, 10)
+        }
+    }
 
-                Spacer()
+    // MARK: - Tonight Banner
 
-                if !ClipRouter.allExperiences.isEmpty {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("REGISTERED CLIPS")
-                            .font(.system(size: 11, weight: .semibold))
-                            .tracking(1.2)
-                            .foregroundStyle(.white.opacity(0.4))
-                            .padding(.horizontal, 4)
+    private var tonightBanner: some View {
+        let show = OneLiveMockData.shows[0]
+        return HStack(spacing: 14) {
+            Image(systemName: show.artist.systemImage)
+                .font(.system(size: 26))
+                .foregroundStyle(.secondary)
+                .frame(width: 50, height: 50)
+                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 14))
 
-                        GlassEffectContainer {
-                            VStack(spacing: 8) {
-                                ForEach(ClipRouter.allExperiences.indices, id: \.self) { i in
-                                    let exp = ClipRouter.allExperiences[i]
-                                    let sampleURL = ClipRouter.sampleURL(for: exp.urlPattern)
-                                    ClipCard(
-                                        name: exp.clipName,
-                                        pattern: sampleURL,
-                                        description: exp.clipDescription
-                                    ) {
-                                        router.invoke(urlString: sampleURL)
-                                    }
+            VStack(alignment: .leading, spacing: 3) {
+                Text("TONIGHT")
+                    .font(.system(size: 10, weight: .heavy))
+                    .tracking(2)
+                    .foregroundStyle(.blue)
+                Text(show.artist.name)
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundStyle(.primary)
+                Text("\(show.venue.name) · \(show.venue.city)")
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color(.tertiaryLabel))
+            }
+
+            Spacer()
+        }
+        .padding(16)
+        .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 22))
+        .padding(.horizontal, 16)
+    }
+
+    // MARK: - Journey Timeline
+
+    private var journeyTimeline: some View {
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(JourneyTouchpoint.allCases) { touchpoint in
+                        let isSelected = touchpoint == selectedTouchpoint
+                        let clipCount = clipsForTouchpoint(touchpoint).count
+
+                        Button {
+                            withAnimation(.spring(duration: 0.3)) {
+                                selectedTouchpoint = touchpoint
+                            }
+                        } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: touchpoint.icon)
+                                    .font(.system(size: 12, weight: .semibold))
+
+                                Text(touchpoint.rawValue)
+                                    .font(.system(size: 13, weight: isSelected ? .bold : .medium))
+                                    .lineLimit(1)
+
+                                if clipCount > 0 {
+                                    Text("\(clipCount)")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundStyle(.white)
+                                        .frame(width: 18, height: 18)
+                                        .background(.blue, in: .circle)
                                 }
                             }
+                            .foregroundStyle(isSelected ? .primary : .secondary)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .glassEffect(.regular.interactive(), in: .capsule)
+                            .opacity(isSelected ? 1.0 : 0.78)
                         }
+                        .buttonStyle(.plain)
+                        .id(touchpoint)
                     }
-                    .padding(.horizontal, 16)
                 }
-
-                Spacer()
-                    .frame(height: 16)
-
-                InvocationConsole(router: router)
-                    .padding(.bottom, 16)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+            }
+            .scrollClipDisabled()
+            .padding(.vertical, 4)
+            .onChange(of: selectedTouchpoint) { _, newValue in
+                withAnimation { proxy.scrollTo(newValue, anchor: .center) }
             }
         }
     }
+
+    // MARK: - Context Strip
+
+    private var contextStrip: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 6) {
+                Image(systemName: selectedTouchpoint.icon)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundStyle(.blue)
+                Text(selectedTouchpoint.fanContext)
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color(.label))
+            }
+
+            HStack(spacing: 5) {
+                Image(systemName: "bell.fill")
+                    .font(.system(size: 9))
+                    .foregroundStyle(.orange)
+                Text(notificationHintText)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Color(.secondaryLabel))
+            }
+        }
+    }
+
+    private var notificationHintText: String {
+        switch selectedTouchpoint {
+        case .discovery:
+            return "8h window: Push merch preview before they forget"
+        case .ticketPurchase:
+            return "8h window: Fan is in spending mode — push a bundle"
+        case .theWait:
+            return "8h window: Each Clip open resets it. Re-engage weekly."
+        case .showDay:
+            return "8h window: Clip at 7 PM = pushes until 3 AM"
+        case .postShow:
+            return "8h window: \"Free shipping until midnight\""
+        }
+    }
+
+    // MARK: - Clips Content
+
+    @ViewBuilder
+    private var clipsContent: some View {
+        let clips = clipsForTouchpoint(selectedTouchpoint)
+
+        if clips.isEmpty {
+            emptyState
+                .padding(.top, 20)
+        } else {
+            VStack(spacing: 12) {
+                ForEach(clips.indices, id: \.self) { i in
+                    let exp = clips[i]
+                    let sampleURL = ClipRouter.sampleURL(for: exp.urlPattern)
+                    InvocationCard(
+                        experience: exp,
+                        sampleURL: sampleURL
+                    ) {
+                        router.invoke(urlString: sampleURL)
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+        }
+    }
+
+    // MARK: - Empty State
+
+    private var emptyState: some View {
+        VStack(spacing: 14) {
+            Image(systemName: "plus.circle.dashed")
+                .font(.system(size: 36))
+                .foregroundStyle(Color(.quaternaryLabel))
+
+            Text("No clips for \(selectedTouchpoint.rawValue)")
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(.tertiary)
+
+            Text("Set touchpoint = .\(touchpointCase)")
+                .font(.system(size: 12, design: .monospaced))
+                .foregroundStyle(.blue.opacity(0.6))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
+    }
+
+    private var touchpointCase: String {
+        switch selectedTouchpoint {
+        case .discovery: return "discovery"
+        case .ticketPurchase: return "ticketPurchase"
+        case .theWait: return "theWait"
+        case .showDay: return "showDay"
+        case .postShow: return "postShow"
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func clipsForTouchpoint(_ touchpoint: JourneyTouchpoint) -> [any ClipExperience.Type] {
+        ClipRouter.allExperiences.filter { $0.touchpoint == touchpoint }
+    }
 }
 
-struct ClipCard: View {
-    let name: String
-    let pattern: String
-    let description: String
-    let onTap: () -> Void
+// MARK: - Invocation Card
+
+struct InvocationCard: View {
+    let experience: any ClipExperience.Type
+    let sampleURL: String
+    let onInvoke: () -> Void
 
     var body: some View {
-        Button(action: onTap) {
-            HStack(spacing: 14) {
-                Image(systemName: "appclip")
-                    .font(.system(size: 20))
-                    .foregroundStyle(.blue)
-                    .frame(width: 40, height: 40)
-
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(name)
-                        .font(.system(size: 15, weight: .semibold))
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text(experience.clipName)
+                        .font(.system(size: 17, weight: .bold))
                         .foregroundStyle(.primary)
-                    Text(pattern)
-                        .font(.system(size: 12, design: .monospaced))
-                        .foregroundStyle(.blue.opacity(0.8))
+                    Spacer()
+                    if experience.teamName != "Reactiv" {
+                        Text(experience.teamName)
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(.blue)
+                    }
                 }
 
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(.tertiary)
+                Text(experience.clipDescription)
+                    .font(.system(size: 13))
+                    .foregroundStyle(Color(.label))
+                    .lineLimit(2)
             }
-            .padding(14)
-            .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 16))
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 12)
+
+            Button(action: onInvoke) {
+                HStack(spacing: 10) {
+                    Image(systemName: experience.invocationSource.icon)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(.blue)
+                        .frame(width: 32, height: 32)
+                        .glassEffect(.regular.interactive(), in: .circle)
+
+                    Text(experience.invocationSource.triggerLabel)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(.blue)
+
+                    Spacer()
+
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(.tertiary)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 10)
+                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 10)
+            .padding(.bottom, 12)
         }
-        .buttonStyle(.plain)
+        .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 22))
     }
 }

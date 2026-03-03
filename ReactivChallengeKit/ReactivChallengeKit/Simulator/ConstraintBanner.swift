@@ -1,3 +1,9 @@
+//  ConstraintBanner.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import SwiftUI
 
 /// Non-dismissible banner replicating the real App Clip "Get the full app" bar.
@@ -11,6 +17,7 @@ struct ConstraintBanner: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text("App Clip Preview")
                     .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(.primary)
                 Text("Get the full app experience")
                     .font(.system(size: 11))
                     .foregroundStyle(.secondary)
@@ -26,7 +33,7 @@ struct ConstraintBanner: View {
                 .glassEffect(.regular.interactive(), in: .capsule)
         }
         .padding(14)
-        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 20))
+        .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 20))
         .padding(.horizontal, 16)
     }
 }

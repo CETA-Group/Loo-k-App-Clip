@@ -1,10 +1,17 @@
+//  HelloClipExperience.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import SwiftUI
 
-/// Example clip demonstrating ClipExperience protocol conformance.
 struct HelloClipExperience: ClipExperience {
     static let urlPattern = "example.com/hello/:name"
     static let clipName = "Hello Clip"
-    static let clipDescription = "A minimal example demonstrating ClipExperience protocol conformance."
+    static let clipDescription = "A minimal example showing how the protocol works."
+    static let touchpoint: JourneyTouchpoint = .showDay
+    static let invocationSource: InvocationSource = .qrCode
 
     let context: ClipContext
 
@@ -14,12 +21,7 @@ struct HelloClipExperience: ClipExperience {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color.blue.opacity(0.6), Color.purple.opacity(0.4)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            ClipBackground()
 
             VStack(spacing: 32) {
                 Spacer()
@@ -27,11 +29,11 @@ struct HelloClipExperience: ClipExperience {
                 VStack(spacing: 12) {
                     Image(systemName: "hand.wave.fill")
                         .font(.system(size: 64))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.primary)
 
                     Text("Hello, \(name)!")
                         .font(.system(size: 38, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.primary)
                 }
 
                 Spacer()
@@ -53,12 +55,10 @@ struct HelloClipExperience: ClipExperience {
 
                 Text("Replace this with your own clip experience.")
                     .font(.system(size: 13))
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(.tertiary)
 
-                ConstraintBanner()
-                    .padding(.bottom, 16)
+                Spacer().frame(height: 8)
             }
-            .safeAreaPadding(.top, 60)
         }
     }
 }
@@ -82,6 +82,6 @@ private struct InfoRow: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
-        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 12))
+        .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 12))
     }
 }

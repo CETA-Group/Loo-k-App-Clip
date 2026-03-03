@@ -1,3 +1,9 @@
+//  MomentTimer.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import SwiftUI
 internal import Combine
 
@@ -19,7 +25,7 @@ struct MomentTimer: View {
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
-        .glassEffect(.regular, in: .capsule)
+        .glassEffect(.regular.interactive(), in: .capsule)
         .onReceive(timer) { _ in
             elapsed = Date().timeIntervalSince(startDate)
         }

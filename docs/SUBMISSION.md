@@ -2,52 +2,80 @@
 ## Clip Name: ___
 ## Invocation URL Pattern: ___
 
-### The Real-World Trigger (2-3 sentences)
-Where does the user physically encounter this clip? What are they doing when they scan/tap/click?
-(e.g., "Standing in front of a trailhead sign at a national park")
+---
 
+## What Great Looks Like
 
+Your submission is strong when it is:
+- **Specific**: one clear fan moment, one clear problem, one clear outcome
+- **Clip-shaped**: value in under 30 seconds, no heavy onboarding
+- **Business-aware**: connects to revenue (venue, online, or both)
+- **Testable**: prototype actually runs in the simulator with your URL pattern
 
-### The Moment (3-5 sentences)
-What happens from invocation to completion? What value does the user get in under 30 seconds?
+---
 
+### 1. Problem Framing
 
+Which touchpoint(s) in the concert customer journey are you targeting?
 
-### Why This Must Be a Clip (not an app)
-- Would the user install a full app for this? Why not?
-- What makes the ephemeral, no-install nature essential?
+- [ ] Discovery — fan learns about the concert
+- [ ] Ticket Purchase — fan buys tickets
+- [ ] The Wait — period between purchase and show day
+- [ ] Show Day — fan is at the venue
+- [ ] Post-Show Afterglow — fan leaves in a heightened emotional state
 
+What friction or missed opportunity are you solving for? (3-5 sentences)
 
+---
 
-### Invocation Source
+### 2. Proposed Solution
+
+**How is the Clip invoked?** (check all that apply)
 - [ ] QR Code (printed on physical surface)
-- [ ] NFC Tag (embedded in object)
-- [ ] Safari Smart Banner (website visit)
-- [ ] Messages / SMS Link
+- [ ] NFC Tag (embedded in object — wristband, poster, etc.)
+- [ ] iMessage / SMS Link
+- [ ] Safari Smart App Banner
 - [ ] Apple Maps (location-based)
 - [ ] Siri Suggestion
 - [ ] Other: ___
 
-### Industry / Domain
-- [ ] Food & Hospitality
-- [ ] Healthcare
-- [ ] Education
-- [ ] Transportation & Mobility
-- [ ] Entertainment & Events
-- [ ] Fitness & Wellness
-- [ ] Real Estate
-- [ ] Government & Public Services
-- [ ] Travel & Tourism
-- [ ] IoT & Smart Devices
-- [ ] Social
-- [ ] Other: ___
+**End-to-end user experience** (step by step):
+1. 
+2. 
+3. 
 
-### Technical Approach (brief)
-What iOS frameworks/APIs does your clip use? What external APIs (if any)?
+**How does the 8-hour notification window factor into your strategy?**
 
+---
 
+### 3. Platform Extensions (if applicable)
+
+Does your solution require new Reactiv Clips capabilities that do not exist today? If so, describe them and explain why they are required.
+
+---
+
+### 4. Prototype Description
+
+What does your working prototype demonstrate? Which screens/flows are implemented?
+
+Minimum expectation:
+- A working `ClipExperience`
+- Invokable via your URL pattern in Invocation Console
+- At least one complete user flow with a clear end state
+
+---
+
+### 5. Impact Hypothesis
+
+How does this increase One Live's merchandise revenue? Be specific about:
+- Which channel benefits (venue, online, or both)?
+- What conversion improvement do you estimate, and why?
+- Why this touchpoint is the right place to intervene
+
+---
 
 ### Demo Video
+
 Link: ___
 
 ### Screenshot(s)

@@ -1,3 +1,9 @@
+//  ClipContext.swift
+//  ReactivChallengeKit
+//
+//  Copyright © 2025 Reactiv Technologies Inc. All rights reserved.
+//
+
 import Foundation
 
 /// Parsed invocation data passed to every ClipExperience.

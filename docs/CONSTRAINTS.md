@@ -70,6 +70,40 @@ Real App Clips can use most iOS frameworks, but some are restricted:
 
 **In this simulator:** All iOS simulator frameworks are available. Just be aware that your idea should only rely on frameworks a real clip could use.
 
+## The 8-Hour Push Notification Window
+
+This is unique to App Clips and critical to the One Live challenge. When a user opens an App Clip, the app can send **ephemeral push notifications for up to 8 hours** — without the user explicitly granting notification permission.
+
+This means:
+- Fan opens a Clip at 7 PM when doors open → One Live can push notifications until 3 AM
+- Each notification can deep-link back to the Clip or to the online store
+- The window resets each time the Clip is opened
+
+**In the concert context, this is transformative:**
+- **Show Day (7 PM):** "Intermission deal: 20% off vinyl for 15 minutes"
+- **During show (9 PM):** "Order from your seat — pick up at Booth #3, no line"
+- **Post-show (11 PM):** "Missed the merch booth? Free shipping until midnight"
+- **Late night (2 AM):** "Last chance: only 12 tour-exclusive vinyls left"
+
+**In this simulator:** Notifications are not enforced, but describe your notification strategy in SUBMISSION.md. Use the `NotificationPreview` component to visualize what your pushes would look like.
+
+---
+
+## Constraints in the Concert Context
+
+Each App Clip constraint maps directly to the concert merch experience:
+
+| Constraint | Concert Reality |
+|---|---|
+| **URL invocation** | QR codes on booth signage, NFC tags on wristbands, iMessage links from friends, Smart App Banners on artist websites |
+| **15 MB size limit** | No bundled product images — load from server or use placeholders. Keep it lean. |
+| **Ephemeral lifecycle** | Fan opens Clip at the show, buys merch, puts phone away. No account needed, no saved state. |
+| **30-second moment** | Fan is standing in a crowded venue or sitting in their seat. Browse, tap, done. |
+| **Single focused task** | "Buy this merch" or "Pre-order for pickup" — not a full shopping app with categories and wishlist. |
+| **8-hour notifications** | The bridge between show-day and post-show. Time-sensitive offers when purchase intent is highest. |
+
+---
+
 ## What This All Means for Design
 
 The constraints of App Clips define a specific *shape* of experience:
