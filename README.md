@@ -187,6 +187,9 @@ Run the app, type your invocation URL in the console (e.g., `example.com/your-te
   - You likely reused a struct name; run scaffold script again with a unique experience name
 - Clip does not appear on landing
   - Build once in Xcode or run `bash scripts/generate-registry.sh`
+- Xcode shows team file without target membership
+  - Expected: submissions are compiled through auto-generated `GeneratedSubmissions.swift`
+  - Build once (or run `bash scripts/generate-registry.sh`) and verify your clip appears
 - Script says template missing
   - Run commands from repo root and verify `Submissions/_template` exists
 

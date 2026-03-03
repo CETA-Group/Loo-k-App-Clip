@@ -281,7 +281,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				EXCLUDED_RESOURCE_FILE_NAMES = "_template/* */_template/* ../Submissions/_template/* ../Submissions/_template/**/*";
+				EXCLUDED_RESOURCE_FILE_NAMES = "SUBMISSION.md _template/* */_template/* ../Submissions/_template/* ../Submissions/_template/**/*";
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"_template/*.swift",
 					"*/_template/*.swift",
@@ -331,7 +331,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
-				EXCLUDED_RESOURCE_FILE_NAMES = "_template/* */_template/* ../Submissions/_template/* ../Submissions/_template/**/*";
+				EXCLUDED_RESOURCE_FILE_NAMES = "SUBMISSION.md _template/* */_template/* ../Submissions/_template/* ../Submissions/_template/**/*";
 				EXCLUDED_SOURCE_FILE_NAMES = (
 					"_template/*.swift",
 					"*/_template/*.swift",
