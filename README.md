@@ -141,8 +141,7 @@ Use this repo to focus on product decisions, flow quality, and 30-second UX — 
 
 ## Zero-to-PR Quickstart
 
-Quick Start Video:
-- [assets/quick-start.mov](assets/quick-start.mov)
+[Quick Start Video](https://drive.google.com/file/d/1DCc-6cTfAb-m0l9zo39bzyB5LHp56Wh4/view?usp=drivesdk)
 
 ### 0) Set the goal
 
