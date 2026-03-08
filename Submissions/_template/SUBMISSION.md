@@ -81,5 +81,10 @@ This creates business impact primarily at the top of the housing discovery funne
 Link: ___
 
 ### Screenshot(s)
-- ___
-- ___
+- <img width="375" height="786" alt="截屏2026-03-08 上午3 09 09" src="https://github.com/user-attachments/assets/06b1c268-6d05-4169-8b65-8a0d34ad9e0c" />
+
+- <img width="375" height="786" alt="截屏2026-03-08 上午3 10 18" src="https://github.com/user-attachments/assets/ed4b357d-1f12-4338-ae75-84d505bca9fa" />
+
+- <img width="375" height="786" alt="截屏2026-03-08 上午3 10 42" src="https://github.com/user-attachments/assets/8f2e4829-daea-442b-ac28-d584309e38e0" />
+
+
