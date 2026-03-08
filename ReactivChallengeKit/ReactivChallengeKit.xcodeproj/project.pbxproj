@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		33DCF9862F5D3DB9002B0752 /* Exceptions for "../Submissions" folder in "ReactivChallengeKit" target */ = {
+		33DCFA822F5D5796002B0752 /* Exceptions for "../Submissions" folder in "ReactivChallengeKit" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				look/MyClipExperience.swift,
@@ -30,7 +30,7 @@
 		74AB00012F525C060097EC9A /* ../Submissions */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				33DCF9862F5D3DB9002B0752 /* Exceptions for "../Submissions" folder in "ReactivChallengeKit" target */,
+				33DCFA822F5D5796002B0752 /* Exceptions for "../Submissions" folder in "ReactivChallengeKit" target */,
 			);
 			path = ../Submissions;
 			sourceTree = "<group>";
